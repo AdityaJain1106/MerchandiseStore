@@ -85,8 +85,16 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
+          {/* Mobile Controls (Cart + Menu) */}
+          <div className="md:hidden flex items-center space-x-4">
+            <Link to="/cart" className="relative text-brand-light hover:text-white transition-colors">
+              <ShoppingCart size={24} />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-[10px] font-bold h-5 w-5 rounded-full flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-brand-light hover:text-white focus:outline-none"
@@ -121,10 +129,6 @@ const Navbar = () => {
                 <Link to="/wishlist" onClick={() => setIsOpen(false)} className="text-brand-light relative">
                   <Heart size={24} />
                   {wishlist.length > 0 && <span className="absolute -top-1 -right-1 bg-red-500 w-3 h-3 rounded-full"></span>}
-                </Link>
-                <Link to="/cart" onClick={() => setIsOpen(false)} className="text-brand-light relative">
-                  <ShoppingCart size={24} />
-                  {cartCount > 0 && <span className="absolute -top-1 -right-1 bg-blue-500 w-3 h-3 rounded-full"></span>}
                 </Link>
                 {user ? (
                   <button onClick={() => { setIsOpen(false); handleLogout(); }} className="text-brand-light">

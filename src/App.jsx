@@ -13,6 +13,7 @@ import Home from './pages/Home';
 import Shop from './pages/Shop';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
+import Wishlist from './pages/Wishlist';
 import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
@@ -101,6 +102,7 @@ function App() {
           <Route path="shop" element={<Shop />} />
           <Route path="product/:id" element={<ProductDetails />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="wishlist" element={<Wishlist />} />
           <Route path="contact" element={<Contact />} />
           <Route path="privacy" element={<Privacy />} />
           <Route path="terms" element={<Terms />} />
