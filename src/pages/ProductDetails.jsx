@@ -5,6 +5,7 @@ import { ArrowLeft, ShoppingCart, Heart, ShieldCheck, Truck, RotateCcw, X } from
 import useStore from '../store/useStore';
 import productsData from '../data/products.json';
 import Button from '../components/Button';
+import ProductReviews from '../components/ProductReviews';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -222,6 +223,8 @@ const ProductDetails = () => {
           
         </div>
       </div>
+
+      <ProductReviews productId={product.id} />
 
       <AnimatePresence>
         {isSizeGuideOpen && (
