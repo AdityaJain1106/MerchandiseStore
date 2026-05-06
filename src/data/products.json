@@ -1,0 +1,434 @@
+[
+  {
+    "id": "hoodie1",
+    "name": "One Block Hoodie",
+    "category": "Hoodies",
+    "price": 1300,
+    "originalPrice": 1600,
+    "discount": "63%off",
+    "colors": "+12/color patterns",
+    "mainImage": "aCookieGod_Official_Store/10002.png",
+    "hoverImage": "aCookieGod_Official_Store/10003.png",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "availableColors": [
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "White",
+        "hex": "#FFFFFF"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1E3A8A"
+      },
+      {
+        "name": "Red",
+        "hex": "#DC2626"
+      }
+    ]
+  },
+  {
+    "id": "shirt1",
+    "name": "One Block T-Shirt",
+    "category": "Shirts",
+    "price": 600,
+    "originalPrice": 700,
+    "discount": "36%off",
+    "colors": "+6/color patterns",
+    "mainImage": "aCookieGod_Official_Store/10004.png",
+    "hoverImage": "aCookieGod_Official_Store/10005.png",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "availableColors": [
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "White",
+        "hex": "#FFFFFF"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1E3A8A"
+      }
+    ]
+  },
+  {
+    "id": "hoodie2",
+    "name": "Embroidered Cookie MMXVI",
+    "category": "Hoodies",
+    "price": 2000,
+    "originalPrice": 2100,
+    "discount": "27%off",
+    "colors": "+12/color patterns",
+    "mainImage": "aCookieGod_Official_Store/10006.png",
+    "hoverImage": "aCookieGod_Official_Store/10007.png",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "availableColors": [
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "White",
+        "hex": "#FFFFFF"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1E3A8A"
+      },
+      {
+        "name": "Red",
+        "hex": "#DC2626"
+      }
+    ]
+  },
+  {
+    "id": "shirt2",
+    "name": "Cookie MMXVI",
+    "category": "Shirts",
+    "price": 700,
+    "originalPrice": 1000,
+    "discount": "63%off",
+    "colors": "+3/color patterns",
+    "mainImage": "aCookieGod_Official_Store/10008.png",
+    "hoverImage": "aCookieGod_Official_Store/10009.png",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "availableColors": [
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "White",
+        "hex": "#FFFFFF"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1E3A8A"
+      }
+    ]
+  },
+  {
+    "id": "hoodie3",
+    "name": "Gaming & Snacking Hoodie",
+    "category": "Hoodies",
+    "price": 1310,
+    "originalPrice": 1600,
+    "discount": "32%off",
+    "colors": "+7/color patterns",
+    "mainImage": "aCookieGod_Official_Store/10010.png",
+    "hoverImage": "aCookieGod_Official_Store/10011.png",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "availableColors": [
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "White",
+        "hex": "#FFFFFF"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1E3A8A"
+      },
+      {
+        "name": "Red",
+        "hex": "#DC2626"
+      }
+    ]
+  },
+  {
+    "id": "shirt3",
+    "name": "Gaming & Snacking T-Shirt",
+    "category": "Shirts",
+    "price": 1000,
+    "originalPrice": 1200,
+    "discount": "3%off",
+    "colors": "+12/color patterns",
+    "mainImage": "aCookieGod_Official_Store/10012.png",
+    "hoverImage": "aCookieGod_Official_Store/10013.png",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "availableColors": [
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "White",
+        "hex": "#FFFFFF"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1E3A8A"
+      }
+    ]
+  },
+  {
+    "id": "hoodie4",
+    "name": "Cookei Army Castle Hoodie",
+    "category": "Hoodies",
+    "price": 2300,
+    "originalPrice": 3200,
+    "discount": "40%off",
+    "colors": "+2/color patterns",
+    "mainImage": "aCookieGod_Official_Store/10014.png",
+    "hoverImage": "aCookieGod_Official_Store/10015.png",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "availableColors": [
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "White",
+        "hex": "#FFFFFF"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1E3A8A"
+      },
+      {
+        "name": "Red",
+        "hex": "#DC2626"
+      }
+    ]
+  },
+  {
+    "id": "shirt4",
+    "name": "Cookei Army Castle T-Shirt",
+    "category": "Shirts",
+    "price": 700,
+    "originalPrice": 800,
+    "discount": "24%off",
+    "colors": "+19/color patterns",
+    "mainImage": "aCookieGod_Official_Store/10016.png",
+    "hoverImage": "aCookieGod_Official_Store/10017.png",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "availableColors": [
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "White",
+        "hex": "#FFFFFF"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1E3A8A"
+      }
+    ]
+  },
+  {
+    "id": "cap1",
+    "name": "Cookei Bean Cap",
+    "category": "Caps",
+    "price": 900,
+    "originalPrice": 1000,
+    "discount": "10%off",
+    "colors": "+1/color patterns",
+    "mainImage": "aCookieGod_Official_Store/10018.png",
+    "hoverImage": "aCookieGod_Official_Store/10019.png",
+    "sizes": [
+      "One Size"
+    ],
+    "availableColors": [
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "White",
+        "hex": "#FFFFFF"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1E3A8A"
+      },
+      {
+        "name": "Red",
+        "hex": "#DC2626"
+      }
+    ]
+  },
+  {
+    "id": "shirt5",
+    "name": "Snack Break T-Shirt",
+    "category": "Shirts",
+    "price": 900,
+    "originalPrice": 1260,
+    "discount": "20%off",
+    "colors": "+9/color patterns",
+    "mainImage": "aCookieGod_Official_Store/10020.png",
+    "hoverImage": "aCookieGod_Official_Store/10021.png",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "availableColors": [
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "White",
+        "hex": "#FFFFFF"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1E3A8A"
+      }
+    ]
+  },
+  {
+    "id": "shirt6",
+    "name": "Cookei Army seal T-Shirt",
+    "category": "Shirts",
+    "price": 700,
+    "originalPrice": 800,
+    "discount": "7%off",
+    "colors": "+8/color patterns",
+    "mainImage": "aCookieGod_Official_Store/10022.png",
+    "hoverImage": "aCookieGod_Official_Store/10023.png",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "availableColors": [
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "White",
+        "hex": "#FFFFFF"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1E3A8A"
+      },
+      {
+        "name": "Red",
+        "hex": "#DC2626"
+      }
+    ]
+  },
+  {
+    "id": "mug",
+    "name": "Dip your Cookeis Mug",
+    "category": "Mugs",
+    "price": 970,
+    "originalPrice": 1100,
+    "discount": "31%off",
+    "colors": "+1/color patterns",
+    "mainImage": "aCookieGod_Official_Store/10024.png",
+    "hoverImage": "aCookieGod_Official_Store/10025.png",
+    "sizes": [
+      "One Size"
+    ],
+    "availableColors": [
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "White",
+        "hex": "#FFFFFF"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1E3A8A"
+      }
+    ]
+  },
+  {
+    "id": "poster1",
+    "name": "Cookei Sticker",
+    "category": "Posters",
+    "price": 1900,
+    "originalPrice": 2100,
+    "discount": "16%off",
+    "colors": "+6/color patterns",
+    "mainImage": "aCookieGod_Official_Store/10026.png",
+    "hoverImage": null,
+    "sizes": [
+      "One Size"
+    ],
+    "availableColors": [
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "White",
+        "hex": "#FFFFFF"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1E3A8A"
+      },
+      {
+        "name": "Red",
+        "hex": "#DC2626"
+      }
+    ]
+  }
+]

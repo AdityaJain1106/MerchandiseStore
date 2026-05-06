@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-light: #ECE8DD;
+  --color-brand-primary: #142857;
+  --color-brand-dark: #040f2a;
+  
+  --font-sans: 'Poppins', sans-serif;
+  --font-display: 'Montserrat', sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: var(--color-brand-light);
+    --foreground: var(--color-brand-dark);
+  }
+
+  .dark {
+    --background: var(--color-brand-dark);
+    --foreground: var(--color-brand-light);
+  }
+
+  body {
+    @apply bg-brand-dark text-brand-light antialiased transition-colors duration-300;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-brand-primary/40 backdrop-blur-md border border-white/10;
+  }
+}
