@@ -7,6 +7,7 @@ import { auth } from './firebase/config';
 import useStore from './store/useStore';
 import { saveCartToFirestore, getCartFromFirestore } from './firebase/cartService';
 import { mergeCarts } from './utils/cartUtils';
+import ToastProvider from './components/ToastProvider';
 
 // Pages
 import Home from './pages/Home';
@@ -96,6 +97,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      <ToastProvider />
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />

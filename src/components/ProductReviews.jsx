@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import useStore from '../store/useStore';
 import { getProductReviews, checkUserHasReviewed, addProductReview, deleteProductReview } from '../firebase/reviewService';
 import Button from './Button';
+import ConfirmModal from './ConfirmModal';
+import { toast } from '../store/useToastStore';
 
 const ProductReviews = ({ productId }) => {
   const user = useStore((state) => state.user);
@@ -12,6 +14,10 @@ const ProductReviews = ({ productId }) => {
   const [loading, setLoading] = useState(true);
   const [userHasReviewed, setUserHasReviewed] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  
+  // Modal State
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [reviewToDelete, setReviewToDelete] = useState(null);
   
   // Form State
   const [rating, setRating] = useState(5);
@@ -70,16 +76,23 @@ const ProductReviews = ({ productId }) => {
     }
   };
 
-  const handleDelete = async (reviewId) => {
-    if (!window.confirm('Are you sure you want to delete your review?')) return;
+  const handleDelete = (reviewId) => {
+    setReviewToDelete(reviewId);
+    setDeleteModalOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!reviewToDelete) return;
     
     try {
-      await deleteProductReview(productId, reviewId);
+      await deleteProductReview(productId, reviewToDelete);
       setUserHasReviewed(false);
       await fetchReviews();
+      setReviewToDelete(null);
+      toast.success('Review deleted successfully 🗑️');
     } catch (error) {
       console.error('Failed to delete review:', error);
-      alert('Failed to delete review. Please try again.');
+      toast.error('Failed to delete review. Please try again.');
     }
   };
 
@@ -254,6 +267,17 @@ const ProductReviews = ({ productId }) => {
 
         </div>
       </div>
+
+      <ConfirmModal
+        isOpen={deleteModalOpen}
+        onClose={() => {
+          setDeleteModalOpen(false);
+          setReviewToDelete(null);
+        }}
+        onConfirm={confirmDelete}
+        title="Delete Review?"
+        message="Are you sure you want to delete your review? This action cannot be undone."
+      />
     </div>
   );
 };

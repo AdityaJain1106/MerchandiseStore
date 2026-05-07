@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { saveCartToFirestore } from '../firebase/cartService';
+import { toast } from './useToastStore';
 
 const useStore = create(
   persist(
@@ -52,11 +53,16 @@ const useStore = create(
           }
           console.log('[Zustand] addToCart updating store...', newCart);
           if (state.canSyncCart()) saveCartToFirestore(state.user.uid, newCart);
+          toast.success(`${product.name} Added to Cart 🛒`);
           return { cart: newCart };
         }),
         
       removeFromCart: (cartItemId) =>
         set((state) => {
+          const itemToRemove = state.cart.find((item) => item.cartItemId ? item.cartItemId === cartItemId : item.id === cartItemId);
+          if (itemToRemove) {
+            toast.info(`${itemToRemove.name} Removed from Cart 🗑️`);
+          }
           // Fallback to matching id if cartItemId doesn't exist on older items
           const newCart = state.cart.filter((item) => item.cartItemId ? item.cartItemId !== cartItemId : item.id !== cartItemId);
           console.log('[Zustand] removeFromCart updating store...', newCart);
@@ -80,8 +86,10 @@ const useStore = create(
         set((state) => {
           const exists = state.wishlist.find((item) => item.id === product.id);
           if (exists) {
+            toast.info(`${product.name} Removed from Wishlist 💔`);
             return { wishlist: state.wishlist.filter((item) => item.id !== product.id) };
           }
+          toast.success(`${product.name} Added to Wishlist ❤️`);
           return { wishlist: [...state.wishlist, product] };
         }),
         
