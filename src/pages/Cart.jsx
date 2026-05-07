@@ -1,16 +1,19 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Trash2, ArrowRight, ShoppingBag, Plus, Minus } from 'lucide-react';
 import useStore from '../store/useStore';
 import Button from '../components/Button';
+import CheckoutModal from '../components/CheckoutModal';
 
 const Cart = () => {
   const cart = useStore((state) => state.cart);
   const updateQuantity = useStore((state) => state.updateQuantity);
   const removeFromCart = useStore((state) => state.removeFromCart);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   const subtotal = cart.reduce((acc, item) => acc + (Number(item.price) * item.quantity), 0);
-  const shipping = subtotal > 0 ? 0 : 0; // Free shipping as per original
+  const shipping = 0; // Free shipping
   const total = subtotal + shipping;
 
   if (cart.length === 0) {
@@ -130,10 +133,14 @@ const Cart = () => {
               <p className="text-xs text-gray-500 text-right">Inclusive of all taxes</p>
             </div>
 
-            <Button className="w-full h-14 text-lg mt-8">
+            <Button
+              id="proceed-to-checkout-btn"
+              className="w-full h-14 text-lg mt-8"
+              onClick={() => setIsCheckoutOpen(true)}
+            >
               Proceed to Checkout <ArrowRight size={20} />
             </Button>
-            
+
             <div className="mt-6 flex justify-center gap-4 opacity-50">
               <img src="/assets/aCookieGod_Official_Store/Paytm-Logo.png" alt="Paytm" className="h-6 object-contain" />
               <img src="/assets/aCookieGod_Official_Store/Google_Pay-Logo.png" alt="GPay" className="h-6 object-contain" />
@@ -141,6 +148,14 @@ const Cart = () => {
           </div>
         </div>
       </div>
+
+      {/* Checkout Modal */}
+      <CheckoutModal
+        isOpen={isCheckoutOpen}
+        onClose={() => setIsCheckoutOpen(false)}
+        cart={cart}
+        total={total}
+      />
     </div>
   );
 };

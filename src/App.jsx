@@ -20,6 +20,8 @@ import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Auth from './pages/Auth';
 import Story from './pages/Story';
+import OrderSuccess from './pages/OrderSuccess';
+import OrderHistory from './pages/OrderHistory';
 
 function App() {
   const setUser = useStore((state) => state.setUser);
@@ -110,6 +112,8 @@ function App() {
           <Route path="terms" element={<Terms />} />
           <Route path="auth" element={<Auth />} />
           <Route path="story" element={<Story />} />
+          <Route path="order-success" element={<OrderSuccess />} />
+          <Route path="orders" element={<OrderHistory />} />
         </Route>
       </Routes>
     </Router>

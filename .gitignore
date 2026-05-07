@@ -48,3 +48,6 @@ Thumbs.db
 # Optional package managers
 .pnp
 .pnp.js
+
+# Local Netlify folder
+.netlify

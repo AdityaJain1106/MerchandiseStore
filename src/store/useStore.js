@@ -32,8 +32,12 @@ const useStore = create(
       },
       
       clearCart: () => {
-        console.log('[Zustand] clearCart called. Wiping local cart ONLY.');
+        console.log('[Zustand] clearCart called after successful order. Clearing local + Firestore cart.');
         set({ cart: [] });
+        const state = get();
+        if (state.user?.uid) {
+          saveCartToFirestore(state.user.uid, []);
+        }
       },
       
       addToCart: (product) =>
