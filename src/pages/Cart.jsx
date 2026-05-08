@@ -142,8 +142,8 @@ const Cart = () => {
             </Button>
 
             <div className="mt-6 flex justify-center gap-4 opacity-50">
-              <img src="/assets/aCookieGod_Official_Store/Paytm-Logo.png" alt="Paytm" className="h-6 object-contain" />
-              <img src="/assets/aCookieGod_Official_Store/Google_Pay-Logo.png" alt="GPay" className="h-6 object-contain" />
+              <img src="/assets/aCookieGod_Official_Store/Paytm-Logo.webp" alt="Paytm" className="h-6 object-contain" />
+              <img src="/assets/aCookieGod_Official_Store/Google_Pay-Logo.webp" alt="GPay" className="h-6 object-contain" />
             </div>
           </div>
         </div>
