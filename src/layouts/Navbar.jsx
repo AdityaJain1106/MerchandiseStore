@@ -53,11 +53,11 @@ const Navbar = () => {
   return (
     <header className="fixed w-full top-0 z-50 bg-brand-primary/80 backdrop-blur-md border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-14">
 
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
-            <img src="/assets/aCookieGod_Official_Store/10001.png" alt="aCookieGod Official Store" className="h-12 w-auto" />
+            <img src="/assets/aCookieGod_Official_Store/10001.png" alt="aCookieGod Official Store" className="h-8 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
