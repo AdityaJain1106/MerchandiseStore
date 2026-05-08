@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-brand-primary border-t border-white/10 pt-16 pb-8 mt-auto">
+    <footer className="bg-brand-primary border-t border-white/10 pt-8 pb-5 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
 
           {/* Brand Info */}
           <div className="flex flex-col items-center md:items-start space-y-4">
-            <img src="/assets/aCookieGod_Official_Store/10001.png" alt="Logo" className="w-40" />
+            <img src="/assets/aCookieGod_Official_Store/10001.png" alt="Logo" className="w-28" />
             <p className="text-sm text-gray-400 mt-4 max-w-xs">
               Premium merchandise and official store. Delivering quality products worldwide.
             </p>
@@ -35,7 +35,7 @@ const Footer = () => {
 
         </div>
 
-        <div className="mt-16 pt-8 border-t border-white/10 text-center text-gray-500 text-sm flex flex-col md:flex-row justify-between items-center">
+        <div className="mt-8 pt-5 border-t border-white/10 text-center text-gray-500 text-sm flex flex-col md:flex-row justify-between items-center">
           <p>&copy; {new Date().getFullYear()} Official Store. All rights reserved.</p>
           <div className="flex gap-4 mt-4 md:mt-0">
             <Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link>

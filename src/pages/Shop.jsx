@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, SlidersHorizontal, X } from 'lucide-react';
@@ -11,8 +11,44 @@ const categories = ['All', 'Hoodies', 'Shirts', 'Accessories', 'Caps', 'Mugs', '
 // Find the maximum price in the data to set the slider range
 const maxProductPrice = Math.max(...productsData.map(p => Number(p.price) || 0));
 
+// ─── Scroll-direction hook (mobile sticky bar) ────────────────────────────────
+// Returns true when the bar should be visible (scroll up or near top).
+// Uses a passive rAF-debounced listener for zero jank and proper cleanup.
+const useScrollVisible = (threshold = 6) => {
+  const [visible, setVisible] = useState(true);
+  const lastY = useRef(0);
+  const rafId = useRef(null);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (rafId.current) return; // already scheduled
+      rafId.current = requestAnimationFrame(() => {
+        const currentY = window.scrollY;
+        if (currentY < 60) {
+          setVisible(true); // always show near top
+        } else if (currentY - lastY.current > threshold) {
+          setVisible(false); // scrolling down
+        } else if (lastY.current - currentY > threshold) {
+          setVisible(true); // scrolling up
+        }
+        lastY.current = currentY;
+        rafId.current = null;
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+    };
+  }, [threshold]);
+
+  return visible;
+};
+
 const Shop = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const mobileBarVisible = useScrollVisible();
   const activeCategory = searchParams.get('category') || 'All';
   const [searchQuery, setSearchQuery] = useState('');
   
@@ -52,9 +88,99 @@ const Shop = () => {
     });
   }, [activeCategory, searchQuery, maxPrice]);
 
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row gap-8 relative">
-      
+
+      {/* ── Mobile Sticky Search + Filter Bar ──────────────────────────────
+          Only visible on screens < md. Slides up/down based on scroll dir.
+          Sits at top-14 (flush below the 56 px navbar).
+      ─────────────────────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {mobileBarVisible && (
+          <motion.div
+            key="mobile-sticky-bar"
+            initial={{ y: -72, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -72, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 340, damping: 32 }}
+            className="md:hidden fixed top-14 left-0 right-0 z-30 px-4 py-2.5"
+            style={{
+              background: 'rgba(4, 15, 42, 0.90)',
+              backdropFilter: 'blur(14px)',
+              WebkitBackdropFilter: 'blur(14px)',
+              borderBottom: '1px solid rgba(255,255,255,0.08)',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.45)',
+            }}
+          >
+            <div className="flex items-center gap-3">
+              {/* Search input */}
+              <div className="relative flex-1">
+                <Search
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  size={17}
+                />
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-full py-2 pl-9 pr-4 text-sm text-white focus:outline-none focus:border-blue-500 transition-colors"
+                />
+                {/* Clear search */}
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition-colors"
+                  >
+                    <X size={14} />
+                  </button>
+                )}
+              </div>
+
+              {/* Filter toggle */}
+              <button
+                onClick={() => setIsFilterOpen(true)}
+                className="flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/20 text-white px-3.5 py-2 rounded-full transition-colors border border-white/10 text-sm flex-shrink-0"
+              >
+                <SlidersHorizontal size={16} />
+                <span className="text-xs font-medium">Filter</span>
+              </button>
+            </div>
+
+            {/* Active-filter chips (show category + price hint) */}
+            {(activeCategory !== 'All' || maxPrice < maxProductPrice) && (
+              <div className="flex items-center gap-2 mt-2 flex-wrap">
+                {activeCategory !== 'All' && (
+                  <span className="flex items-center gap-1 text-xs bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-full px-2.5 py-0.5">
+                    {activeCategory}
+                    <button onClick={() => handleCategoryChange('All')}>
+                      <X size={11} />
+                    </button>
+                  </span>
+                )}
+                {maxPrice < maxProductPrice && (
+                  <span className="flex items-center gap-1 text-xs bg-orange-500/20 text-orange-300 border border-orange-500/30 rounded-full px-2.5 py-0.5">
+                    ≤ ₹{maxPrice}
+                    <button onClick={() => setMaxPrice(maxProductPrice)}>
+                      <X size={11} />
+                    </button>
+                  </span>
+                )}
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Animated spacer — collapses when the sticky bar hides so no dead gap remains */}
+      <motion.div
+        className="md:hidden overflow-hidden"
+        animate={{ height: mobileBarVisible ? 56 : 0 }}
+        transition={{ type: 'spring', stiffness: 340, damping: 32 }}
+        aria-hidden="true"
+      />
+
       {/* Mobile Filter Overlay */}
       <AnimatePresence>
         {isFilterOpen && (
@@ -137,16 +263,17 @@ const Shop = () => {
 
       {/* Main Content Area */}
       <div className="w-full md:w-3/4 flex flex-col">
-        
-        {/* Header & Controls */}
+
+        {/* Header & Controls — desktop only (hidden on mobile, handled by sticky bar) */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
           <div>
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Shop Collection</h1>
             <p className="text-gray-400">Discover all official merchandise.</p>
           </div>
 
-          <div className="w-full sm:w-auto flex gap-4">
-            <div className="relative w-full sm:w-64 flex-grow">
+          {/* Desktop search + filter toggle (hidden on mobile) */}
+          <div className="hidden sm:flex w-auto gap-4">
+            <div className="relative w-64">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
               <input
                 type="text"
@@ -156,9 +283,9 @@ const Shop = () => {
                 className="w-full bg-white/5 border border-white/10 rounded-full py-2 pl-10 pr-4 text-white focus:outline-none focus:border-blue-500 transition-colors"
               />
             </div>
-            
-            {/* Mobile Filter Toggle */}
-            <button 
+
+            {/* Desktop filter toggle (md+ only) */}
+            <button
               onClick={() => setIsFilterOpen(true)}
               className="md:hidden flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full transition-colors border border-white/10"
             >
@@ -169,7 +296,7 @@ const Shop = () => {
 
         {/* Product Grid */}
         {filteredProducts.length > 0 ? (
-          <motion.div 
+          <motion.div
             layout
             className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"
           >
@@ -182,7 +309,7 @@ const Shop = () => {
         ) : (
           <div className="text-center py-20 glass rounded-3xl mt-8">
             <p className="text-2xl text-gray-400 mb-4">No products found matching your criteria.</p>
-            <button 
+            <button
               onClick={clearFilters}
               className="text-blue-400 hover:underline"
             >
@@ -196,3 +323,4 @@ const Shop = () => {
 };
 
 export default Shop;
+
