@@ -10,16 +10,16 @@ import productsData from '../data/products.json';
 // ─── Trust badge data ──────────────────────────────────────────────────────────
 const TRUST_BADGES = [
   { icon: ShieldCheck, label: 'Secure Payments' },
-  { icon: Zap,         label: 'Limited Drops'   },
-  { icon: Star,        label: 'Premium Quality' },
-  { icon: Truck,       label: 'Fast Delivery'   },
+  { icon: Zap, label: 'Limited Drops' },
+  { icon: Star, label: 'Premium Quality' },
+  { icon: Truck, label: 'Fast Delivery' },
 ];
 
 // ─── Floating merch carousel cards ────────────────────────────────────────────
 const MERCH_CARDS = [
-  { id: 'hoodie1', img: 'aCookieGod_Official_Store/10002.png', label: 'One Block Hoodie',   price: '₹1,300' },
+  { id: 'hoodie1', img: 'aCookieGod_Official_Store/10002.png', label: 'One Block Hoodie', price: '₹1,300' },
   { id: 'hoodie2', img: 'aCookieGod_Official_Store/10006.png', label: 'Cookie MMXVI Hoodie', price: '₹2,000' },
-  { id: 'shirt1',  img: 'aCookieGod_Official_Store/10004.png', label: 'One Block T-Shirt',  price: '₹600'   },
+  { id: 'shirt1', img: 'aCookieGod_Official_Store/10004.png', label: 'One Block T-Shirt', price: '₹600' },
 ];
 
 // ─── Mouse-tilt card wrapper ──────────────────────────────────────────────────
@@ -34,7 +34,7 @@ const HoverCard = ({ children, className, style }) => {
   const handleMouse = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     x.set((e.clientX - rect.left) / rect.width - 0.5);
-    y.set((e.clientY - rect.top)  / rect.height - 0.5);
+    y.set((e.clientY - rect.top) / rect.height - 0.5);
   };
   const resetTilt = () => { x.set(0); y.set(0); };
 
@@ -263,75 +263,75 @@ const Home = () => {
                 >
                   {/* Perpetual float + hover-tilt wrapper */}
                   <HoverCard className="w-full">
-                  <motion.div
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ repeat: Infinity, duration: 4.5, ease: 'easeInOut' }}
-                  >
-                    {/* Card */}
-                    <div
-                      className="rounded-3xl p-6 relative overflow-hidden"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(20,40,87,0.85) 0%, rgba(4,15,42,0.9) 100%)',
-                        border: '1px solid rgba(255,255,255,0.12)',
-                        boxShadow: '0 32px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08)',
-                      }}
+                    <motion.div
+                      animate={{ y: [0, -10, 0] }}
+                      transition={{ repeat: Infinity, duration: 4.5, ease: 'easeInOut' }}
                     >
-                      {/* Corner shimmer */}
+                      {/* Card */}
                       <div
-                        className="absolute top-0 right-0 w-32 h-32 pointer-events-none"
+                        className="rounded-3xl p-6 relative overflow-hidden"
                         style={{
-                          background: 'radial-gradient(circle at top right, rgba(249,115,22,0.12), transparent 60%)',
+                          background: 'linear-gradient(135deg, rgba(20,40,87,0.85) 0%, rgba(4,15,42,0.9) 100%)',
+                          border: '1px solid rgba(255,255,255,0.12)',
+                          boxShadow: '0 32px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08)',
                         }}
-                      />
-
-                      {/* Badge */}
-                      <span
-                        className="inline-block text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-4"
-                        style={{ background: 'rgba(249,115,22,0.15)', color: '#fb923c', border: '1px solid rgba(249,115,22,0.3)' }}
                       >
-                        Limited Drop
-                      </span>
-
-                      {/* Product image — bigger for more visual focus */}
-                      <div className="flex items-center justify-center h-56 mb-4">
-                        <motion.img
-                          src={`/assets/${MERCH_CARDS[activeCard].img}`}
-                          alt={MERCH_CARDS[activeCard].label}
-                          className="max-h-full object-contain"
-                          style={{ filter: 'drop-shadow(0 24px 48px rgba(0,0,0,0.65)) drop-shadow(0 0 20px rgba(249,115,22,0.12))' }}
-                          whileHover={{ scale: 1.04 }}
-                          transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+                        {/* Corner shimmer */}
+                        <div
+                          className="absolute top-0 right-0 w-32 h-32 pointer-events-none"
+                          style={{
+                            background: 'radial-gradient(circle at top right, rgba(249,115,22,0.12), transparent 60%)',
+                          }}
                         />
-                      </div>
 
-                      {/* Info */}
-                      <div className="flex items-end justify-between">
-                        <div>
-                          <p className="text-white font-semibold text-sm leading-tight">
-                            {MERCH_CARDS[activeCard].label}
-                          </p>
-                          <p className="text-gray-500 text-xs mt-0.5">Official Merch</p>
-                        </div>
-                        <span className="text-orange-400 font-black text-xl">
-                          {MERCH_CARDS[activeCard].price}
+                        {/* Badge */}
+                        <span
+                          className="inline-block text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-4"
+                          style={{ background: 'rgba(249,115,22,0.15)', color: '#fb923c', border: '1px solid rgba(249,115,22,0.3)' }}
+                        >
+                          Limited Drop
                         </span>
-                      </div>
 
-                      {/* Shop link */}
-                      <Link
-                        to={`/product/${MERCH_CARDS[activeCard].id}`}
-                        className="mt-4 flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-semibold text-white transition-all"
-                        style={{
-                          background: 'rgba(255,255,255,0.06)',
-                          border: '1px solid rgba(255,255,255,0.1)',
-                        }}
-                        onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.12)')}
-                        onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.06)')}
-                      >
-                        View Product <ArrowRight size={14} />
-                      </Link>
-                    </div>
-                  </motion.div>
+                        {/* Product image — bigger for more visual focus */}
+                        <div className="flex items-center justify-center h-56 mb-4">
+                          <motion.img
+                            src={`/assets/${MERCH_CARDS[activeCard].img}`}
+                            alt={MERCH_CARDS[activeCard].label}
+                            className="max-h-full object-contain"
+                            style={{ filter: 'drop-shadow(0 24px 48px rgba(0,0,0,0.65)) drop-shadow(0 0 20px rgba(249,115,22,0.12))' }}
+                            whileHover={{ scale: 1.04 }}
+                            transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+                          />
+                        </div>
+
+                        {/* Info */}
+                        <div className="flex items-end justify-between">
+                          <div>
+                            <p className="text-white font-semibold text-sm leading-tight">
+                              {MERCH_CARDS[activeCard].label}
+                            </p>
+                            <p className="text-gray-500 text-xs mt-0.5">Official Merch</p>
+                          </div>
+                          <span className="text-orange-400 font-black text-xl">
+                            {MERCH_CARDS[activeCard].price}
+                          </span>
+                        </div>
+
+                        {/* Shop link */}
+                        <Link
+                          to={`/product/${MERCH_CARDS[activeCard].id}`}
+                          className="mt-4 flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-semibold text-white transition-all"
+                          style={{
+                            background: 'rgba(255,255,255,0.06)',
+                            border: '1px solid rgba(255,255,255,0.1)',
+                          }}
+                          onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.12)')}
+                          onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.06)')}
+                        >
+                          View Product <ArrowRight size={14} />
+                        </Link>
+                      </div>
+                    </motion.div>
                   </HoverCard>
                 </motion.div>
               </AnimatePresence>
