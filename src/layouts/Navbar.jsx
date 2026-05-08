@@ -57,7 +57,7 @@ const Navbar = () => {
 
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
-            <img src="/assets/aCookieGod_Official_Store/10001.png" alt="aCookieGod Official Store" className="h-8 w-auto" />
+            <img src="/assets/aCookieGod_Official_Store/10001.webp" alt="aCookieGod Official Store" className="h-8 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}

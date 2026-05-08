@@ -17,9 +17,9 @@ const TRUST_BADGES = [
 
 // ─── Floating merch carousel cards ────────────────────────────────────────────
 const MERCH_CARDS = [
-  { id: 'hoodie1', img: 'aCookieGod_Official_Store/10002.png', label: 'One Block Hoodie', price: '₹1,300' },
-  { id: 'hoodie2', img: 'aCookieGod_Official_Store/10006.png', label: 'Cookie MMXVI Hoodie', price: '₹2,000' },
-  { id: 'shirt1', img: 'aCookieGod_Official_Store/10004.png', label: 'One Block T-Shirt', price: '₹600' },
+  { id: 'hoodie1', img: 'aCookieGod_Official_Store/10002.webp', label: 'One Block Hoodie', price: '₹1,300' },
+  { id: 'hoodie2', img: 'aCookieGod_Official_Store/10006.webp', label: 'Cookie MMXVI Hoodie', price: '₹2,000' },
+  { id: 'shirt1', img: 'aCookieGod_Official_Store/10004.webp', label: 'One Block T-Shirt', price: '₹600' },
 ];
 
 // ─── Mouse-tilt card wrapper ──────────────────────────────────────────────────

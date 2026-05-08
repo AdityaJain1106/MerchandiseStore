@@ -8,7 +8,7 @@ const Footer = () => {
 
           {/* Brand Info */}
           <div className="flex flex-col items-center md:items-start space-y-4">
-            <img src="/assets/aCookieGod_Official_Store/10001.png" alt="Logo" className="w-28" />
+            <img src="/assets/aCookieGod_Official_Store/10001.webp" alt="Logo" className="w-28" />
             <p className="text-sm text-gray-400 mt-4 max-w-xs">
               Premium merchandise and official store. Delivering quality products worldwide.
             </p>
@@ -18,8 +18,8 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start space-y-4">
             <h3 className="text-lg font-bold tracking-wider text-white uppercase">Payment Methods</h3>
             <div className="flex flex-wrap gap-4 justify-center md:justify-start mt-4">
-              <img src="/assets/aCookieGod_Official_Store/Paytm-Logo.png" alt="Paytm" className="h-8 object-contain bg-white/10 p-1 rounded" />
-              <img src="/assets/aCookieGod_Official_Store/Google_Pay-Logo.png" alt="Google Pay" className="h-8 object-contain bg-white/10 p-1 rounded" />
+              <img src="/assets/aCookieGod_Official_Store/Paytm-Logo.webp" alt="Paytm" className="h-8 object-contain bg-white/10 p-1 rounded" />
+              <img src="/assets/aCookieGod_Official_Store/Google_Pay-Logo.webp" alt="Google Pay" className="h-8 object-contain bg-white/10 p-1 rounded" />
             </div>
           </div>
 
