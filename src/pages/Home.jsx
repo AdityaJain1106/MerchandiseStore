@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, Zap, Star, Truck, ChevronDown } from 'lucide-react';
 import HeroScene from '../components/HeroScene';
@@ -22,7 +22,34 @@ const MERCH_CARDS = [
   { id: 'shirt1',  img: 'aCookieGod_Official_Store/10004.png', label: 'One Block T-Shirt',  price: '₹600'   },
 ];
 
-// ─── Animation variants ────────────────────────────────────────────────────────
+// ─── Mouse-tilt card wrapper ──────────────────────────────────────────────────
+// Tracks pointer inside the element and applies a subtle rotateX/Y tilt.
+// Fully self-contained — no impact on parent state.
+const HoverCard = ({ children, className, style }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [6, -6]), { stiffness: 300, damping: 30 });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-6, 6]), { stiffness: 300, damping: 30 });
+
+  const handleMouse = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set((e.clientX - rect.left) / rect.width - 0.5);
+    y.set((e.clientY - rect.top)  / rect.height - 0.5);
+  };
+  const resetTilt = () => { x.set(0); y.set(0); };
+
+  return (
+    <motion.div
+      className={className}
+      style={{ ...style, rotateX, rotateY, transformStyle: 'preserve-3d', transformPerspective: 900 }}
+      onMouseMove={handleMouse}
+      onMouseLeave={resetTilt}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 32 },
   animate: { opacity: 1, y: 0 },
@@ -125,17 +152,17 @@ const Home = () => {
                 Exclusive drops. Unmatched quality.
               </motion.p>
 
-              {/* CTA button */}
               <motion.div {...fadeUp(0.45)} className="mb-10">
                 <Link to="/shop">
                   <motion.button
-                    whileHover={{ scale: 1.04 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="relative inline-flex items-center gap-3 text-base font-bold text-white px-8 py-4 rounded-full overflow-hidden"
-                    style={{
-                      background: 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)',
-                      boxShadow: '0 0 0 0 rgba(249,115,22,0.4)',
+                    whileHover={{
+                      scale: 1.05,
+                      boxShadow: '0 0 32px 8px rgba(249,115,22,0.45), 0 8px 24px rgba(249,115,22,0.3)',
                     }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ type: 'spring', stiffness: 320, damping: 22 }}
+                    className="relative inline-flex items-center gap-3 text-base font-bold text-white px-8 py-4 rounded-full overflow-hidden group/cta"
+                    style={{ background: 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)' }}
                   >
                     {/* Glow pulse ring */}
                     <motion.span
@@ -152,7 +179,14 @@ const Home = () => {
                       }}
                     />
                     Shop the Collection
-                    <ArrowRight size={18} />
+                    <motion.span
+                      className="inline-flex"
+                      initial={{ x: 0 }}
+                      whileHover={{ x: 3 }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                    >
+                      <ArrowRight size={18} />
+                    </motion.span>
                   </motion.button>
                 </Link>
               </motion.div>
@@ -174,12 +208,30 @@ const Home = () => {
             {/* ── RIGHT — Floating merch showcase ─────────────────── */}
             <div className="flex-1 flex items-center justify-center lg:justify-end relative w-full max-w-sm lg:max-w-none">
 
-              {/* Ambient glow behind cards */}
-              <div
-                className="absolute inset-0 rounded-full pointer-events-none"
+              {/* Stronger cinematic glow orbs behind card */}
+              <motion.div
+                className="absolute pointer-events-none"
+                animate={{ scale: [1, 1.18, 1], opacity: [0.55, 0.9, 0.55] }}
+                transition={{ repeat: Infinity, duration: 5.5, ease: 'easeInOut' }}
                 style={{
-                  background: 'radial-gradient(circle, rgba(249,115,22,0.12) 0%, transparent 65%)',
+                  width: '380px', height: '380px',
+                  top: '50%', left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  background: 'radial-gradient(circle, rgba(249,115,22,0.32) 0%, rgba(234,88,12,0.12) 45%, transparent 70%)',
+                  filter: 'blur(44px)',
+                  borderRadius: '50%',
+                }}
+              />
+              <motion.div
+                className="absolute pointer-events-none"
+                animate={{ scale: [1, 1.14, 1], opacity: [0.35, 0.65, 0.35] }}
+                transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut', delay: 1.8 }}
+                style={{
+                  width: '280px', height: '280px',
+                  top: '15%', left: '10%',
+                  background: 'radial-gradient(circle, rgba(59,130,246,0.26) 0%, transparent 68%)',
                   filter: 'blur(40px)',
+                  borderRadius: '50%',
                 }}
               />
 
@@ -209,10 +261,11 @@ const Home = () => {
                   transition={{ type: 'spring', stiffness: 260, damping: 24 }}
                   className="relative w-[260px] sm:w-[300px] lg:w-[320px] pb-10"
                 >
-                  {/* Perpetual float animation wrapper */}
+                  {/* Perpetual float + hover-tilt wrapper */}
+                  <HoverCard className="w-full">
                   <motion.div
-                    animate={{ y: [0, -12, 0] }}
-                    transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ repeat: Infinity, duration: 4.5, ease: 'easeInOut' }}
                   >
                     {/* Card */}
                     <div
@@ -239,13 +292,15 @@ const Home = () => {
                         Limited Drop
                       </span>
 
-                      {/* Product image */}
-                      <div className="flex items-center justify-center h-48 mb-4">
-                        <img
+                      {/* Product image — bigger for more visual focus */}
+                      <div className="flex items-center justify-center h-56 mb-4">
+                        <motion.img
                           src={`/assets/${MERCH_CARDS[activeCard].img}`}
                           alt={MERCH_CARDS[activeCard].label}
-                          className="max-h-full object-contain drop-shadow-2xl"
-                          style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.6))' }}
+                          className="max-h-full object-contain"
+                          style={{ filter: 'drop-shadow(0 24px 48px rgba(0,0,0,0.65)) drop-shadow(0 0 20px rgba(249,115,22,0.12))' }}
+                          whileHover={{ scale: 1.04 }}
+                          transition={{ type: 'spring', stiffness: 280, damping: 22 }}
                         />
                       </div>
 
@@ -277,6 +332,7 @@ const Home = () => {
                       </Link>
                     </div>
                   </motion.div>
+                  </HoverCard>
                 </motion.div>
               </AnimatePresence>
 
